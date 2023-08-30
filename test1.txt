@@ -1,1 +1,12 @@
-this is the file
+let
+    // Get the current date and time
+    currentDate = DateTime.LocalNow(),
+
+    // Generate a list of dates from currentDate - 30 days to currentDate
+    dateList = List.Dates(Date.AddDays(currentDate, -30), 30, #duration(1, 0, 0, 0)),
+
+    // Convert the list of dates into a table
+    dateTable = Table.FromList(dateList, Splitter.SplitByNothing()),
+    #"Renamed Columns" = Table.RenameColumns(dateTable, {{"Column1", "Date"}})
+in
+    #"Renamed Columns"
